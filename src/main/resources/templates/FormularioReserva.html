@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title>Formulario Reserva</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.6.5/flowbite.min.css" rel="stylesheet">
+        <script src="https://cdn.tailwindcss.com"></script>
+    </head>
+    <body>
+        <div class="container mx-auto mt-5 max-w-xl">
+            <h1 class="text-2xl font-bold mb-5" th:text="${#strings.isEmpty(reserva.id) ? 'Nueva Reserva' : 'Editar Reserva'}"></h1>
+            <form th:action="@{/reservas}" th:object="${reserva}" method="post">
+                <input type="hidden" th:field="*{id}">
+
+                <div class="mb-4">
+                    <label for="nombreCliente" class="block text-sm font-medium text-gray-900">Nombre del Cliente:</label>
+                    <input type="text" id="nombreCliente" name="nombreCliente" placeholder="Ingrese el nombre del cliente" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5 focus:ring-blue-500 focus:border-blue-500" th:field="*{nombreCliente}" required />
+                </div>
+
+                <div class="mb-4">
+                    <label for="dni" class="block text-sm font-medium text-gray-900">DNI:</label>
+                    <input type="text" id="dni" name="dni" placeholder="Ingrese el DNI" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5 focus:ring-blue-500 focus:border-blue-500" th:field="*{dni}" pattern="\d{8}" title="El DNI debe tener 8 dígitos" required />
+                </div>
+
+                <div class="mb-4">
+                    <label for="fechaReserva" class="block text-sm font-medium text-gray-900">Fecha de la Reserva:</label>
+                    <input type="date" id="fechaReserva" name="fechaReserva" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5 focus:ring-blue-500 focus:border-blue-500" th:field="*{fechaReserva}" required />
+                </div>
+
+                <div class="mb-4">
+                    <label for="nroPersonas" class="block text-sm font-medium text-gray-900">Cantidad de Personas:</label>
+                    <input type="number" id="nroPersonas" name="nroPersonas" placeholder="Ingrese cantidad de personas" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5 focus:ring-blue-500 focus:border-blue-500" th:field="*{nroPersonas}" required />
+                </div>
+
+                <div class="mb-4">
+                    <label for="sede" class="block text-sm font-medium text-gray-900">Sede:</label>
+                    <select id="sede" name="sede" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5 focus:ring-blue-500 focus:border-blue-500" th:field="*{sede}" required>
+                        <option value="Sede Central">Sede Central</option>
+                        <option value="Sede Lima">Sede Lima</option>
+                        <option value="Sede Arequipa">Sede Arequipa</option>
+                    </select>
+                </div>
+
+                <div class="flex justify-end">
+                    <button type="submit" class="bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-4 focus:ring-blue-300">
+                        Guardar
+                    </button>
+                </div>
+            </form>
+        </div>
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.6.5/flowbite.min.js"></script>
+    </body>
+</html>
